@@ -23,6 +23,8 @@ export class MainComponent implements OnInit {
 
   guestNames$: Observable<string[]> | undefined;
 
+  isModalActive: boolean = false;
+
   constructor(private guestStore: Store<fromGuestReducer.GuestState>) {}
 
   ngOnInit(): void {
@@ -30,10 +32,9 @@ export class MainComponent implements OnInit {
       fromGuestSelector.guestListSelector
     );
 
-    // // opc 1
-    // this.guestNames$.subscribe((newList) => {
-    //   this.names = newList;
-    // });
+    this.guestStore
+      .select(fromGuestSelector.isAddGuestError)
+      .subscribe((hasError) => (this.isModalActive = hasError));
   }
 
   submit(): void {

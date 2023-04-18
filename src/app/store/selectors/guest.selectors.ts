@@ -9,3 +9,8 @@ export const guestListSelector = createSelector(
   guests,
   (state: fromGuestReducer.GuestState): string[] => state.list
 );
+
+export const isAddGuestError = createSelector(
+  guests,
+  (state: fromGuestReducer.GuestState): boolean => state.error != undefined
+);
