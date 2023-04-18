@@ -11,4 +11,16 @@
     />
     <button class="button is-primary" type="submit">Add</button>
   </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome do convidado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let name of guestNames$ | async">
+        <td>{{ name }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

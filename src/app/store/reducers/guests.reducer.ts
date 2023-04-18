@@ -5,6 +5,7 @@ export const guestsFeatureKey = 'guests';
 
 export interface GuestState {
   list: string[];
+  error?: string;
 }
 
 export const initialState: GuestState = {
@@ -16,6 +17,13 @@ export const reducer = createReducer(
   on(fromGuestActions.addGuestSuccess, (state, action) => {
     return {
       list: [...state.list, action.name],
+      error: undefined,
+    };
+  }),
+  on(fromGuestActions.addGuestFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
     };
   })
 );
