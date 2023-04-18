@@ -1,1 +1,14 @@
-<p>main works!</p>
+<div class="container is-fluid">
+  <p>Lista de convidados:</p>
+  <form (ngSubmit)="submit()" [formGroup]="listForm">
+    <label for="names">Adicionar convidado</label>
+    <input
+      type="text"
+      class="input is-primary"
+      name=""
+      id=""
+      formControlName="name"
+    />
+    <button class="button is-primary" type="submit">Add</button>
+  </form>
+</div>
