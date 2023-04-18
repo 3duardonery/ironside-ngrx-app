@@ -7,6 +7,8 @@ import { MainComponent } from './components/main/main.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { GuestsEffects } from './store/effects/guests.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([GuestsEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: isDevMode(),

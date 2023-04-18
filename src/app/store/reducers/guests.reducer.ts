@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-// import * as GuestsActions from '../actions/guests.actions';
+import * as fromGuestActions from '../actions/guests.actions';
 
 export const guestsFeatureKey = 'guests';
 
@@ -11,4 +11,14 @@ export const initialState: GuestState = {
   list: [],
 };
 
-export const reducer = createReducer(initialState);
+export const reducer = createReducer(
+  initialState,
+  on(fromGuestActions.addGuestSuccess, (state, action) => {
+    const newState = state.list;
+    newState.push(action.name);
+
+    return {
+      list: newState,
+    };
+  })
+);
