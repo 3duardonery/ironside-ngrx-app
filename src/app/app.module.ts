@@ -16,7 +16,7 @@ import { GuestsEffects } from './store/effects/guests.effects';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([GuestsEffects]),
+    EffectsModule.forRoot(GuestsEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: isDevMode(),

@@ -9,7 +9,7 @@ export class GuestsEffects {
   addGuest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromGuestActions.addGuest),
-      tap((action) => {
+      mergeMap((action) => {
         return action.name == 'error'
           ? of(
               fromGuestActions.addGuestFailure({

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import * as fromGuestActions from '../../store/actions/guests.actions';
+import * as fromGuestReducer from '../../store/reducers/guests.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-main',
@@ -15,11 +18,12 @@ export class MainComponent implements OnInit {
 
   names: string[] = [];
 
-  constructor() {}
+  constructor(private guestStore: Store<fromGuestReducer.GuestState>) {}
 
   ngOnInit(): void {}
 
   submit(): void {
-    console.log(this.listForm.value);
+    const guestName = this.listForm.value.name;
+    this.guestStore.dispatch(fromGuestActions.addGuest({ name: guestName }));
   }
 }

@@ -14,11 +14,8 @@ export const initialState: GuestState = {
 export const reducer = createReducer(
   initialState,
   on(fromGuestActions.addGuestSuccess, (state, action) => {
-    const newState = state.list;
-    newState.push(action.name);
-
     return {
-      list: newState,
+      list: [...state.list, action.name],
     };
   })
 );
