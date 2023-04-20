@@ -5,14 +5,14 @@ import * as fromGuestReducer from '../../store/reducers/guests.reducer';
 import * as fromGuestSelector from '../../store/selectors/guest.selectors';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, NgFor, AsyncPipe, NgIf],
 })
 export class MainComponent implements OnInit {
   listForm: FormGroup = new FormGroup({
