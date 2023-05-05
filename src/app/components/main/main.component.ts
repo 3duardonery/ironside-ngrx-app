@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as fromGuestActions from '../../store/actions/guests.actions';
 import * as fromGuestReducer from '../../store/reducers/guests.reducer';
@@ -14,27 +14,27 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, NgFor, AsyncPipe, NgIf],
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   listForm: FormGroup = new FormGroup({
     name: new FormControl(''),
   });
 
-  names: string[] = [];
+  // Angular15: Podemos injetar com a instrução Inject(...)
+  guestStore = inject(Store<fromGuestReducer.GuestState>);
 
-  guestNames$: Observable<string[]> | undefined;
+  guestNames$: Observable<string[]> = this.guestStore.select(
+    fromGuestSelector.guestListSelector
+  );
 
-  isModalActive: boolean = false;
+  isWarningActive: boolean = false;
 
-  constructor(private guestStore: Store<fromGuestReducer.GuestState>) {}
+  // Forma antiga de injetar objetos/serviços no componente
+  //constructor(private guestStore: Store<fromGuestReducer.GuestState>) {}
 
   ngOnInit(): void {
-    this.guestNames$ = this.guestStore.select(
-      fromGuestSelector.guestListSelector
-    );
-
     this.guestStore
       .select(fromGuestSelector.isAddGuestError)
-      .subscribe((hasError) => (this.isModalActive = hasError));
+      .subscribe((hasError) => (this.isWarningActive = hasError));
   }
 
   submit(): void {

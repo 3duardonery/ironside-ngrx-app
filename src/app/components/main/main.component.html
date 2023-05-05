@@ -2,16 +2,10 @@
   <p>Lista de convidados:</p>
   <form (ngSubmit)="submit()" [formGroup]="listForm">
     <label for="names">Adicionar convidado</label>
-    <input
-      type="text"
-      class="input is-primary"
-      name=""
-      id=""
-      formControlName="name"
-    />
+    <input type="text" class="input is-primary" name="" id="" formControlName="name" />
     <button class="button is-primary" type="submit">Add</button>
   </form>
-  <article class="message is-danger" *ngIf="isModalActive">
+  <article class="message is-danger" *ngIf="isWarningActive">
     <div class="message-header">
       <p>Danger</p>
       <button class="delete" aria-label="delete"></button>
